@@ -1,15 +1,13 @@
-import numpy as np
-import pandas as pd
-
 import copy
 import random
+
 from collections import namedtuple
+
+import numpy as np
 
 import data
 
-
 Fold = namedtuple('Fold', 'training_mask, testing_mask, clipnames, call_ids, label_df')
-
 
 class FoldBuilder(object):
     """Build folds for submission or cross validation"""
@@ -53,12 +51,12 @@ class FoldBuilder(object):
         testing_mask = self._build_mask(testing_clipnames)
         return Fold(training_mask, testing_mask,  self.clipnames, range(1, 88), data.label_df)
 
-
+    
     def submission_fold(self):
 
         return self.make_fold(self.training_clipnames, self.testing_clipnames)
-
-
+    
+    
     def make_cvd_folds(self, number_folds, training_proportion, testing_proportion, shuffle=True, random_seed=None):
 
         train_count = int(training_proportion*len(self.training_clipnames))
@@ -77,4 +75,3 @@ class FoldBuilder(object):
             folds.append(self.make_fold(training_clipnames, testing_clipnames))
 
         return folds
-

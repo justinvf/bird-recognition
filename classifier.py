@@ -11,15 +11,8 @@ class LabelDistributingBinaryForest:
     are distributed to each window in that wav.
     """
 
-    def __init__(self, forest_params={}):
-        self.set_params(forest_params=forest_params)
-        self.clf = sklearn.ensemble.RandomForestClassifier(**forest_params)
-
-    def set_params(self, **params):
-        self.params = params
-
-    def get_params(self):
-        return self.params
+    def __init__(self, **kwargs):
+        self.clf = sklearn.ensemble.RandomForestClassifier(**kwargs)
 
     def fit(self, list_of_features, fold):
 

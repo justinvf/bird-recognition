@@ -57,8 +57,14 @@ def get_mfcc_array(clipname):
         filename = "cepst_conc_cepst_nips4b_birds_trainfile%03d.txt" % clipid
         path = os.path.join(train_dir, filename)
 
-    return np.array( [  [float(x) for x in line.strip().split(" ") if x]
-                         for line in file(path).readlines()  ]  ).transpose()
+    mfccs = np.array( [[float(x) for x in line.strip().split(" ") if x] for line in file(path).readlines()]).transpose()
+
+    # Drop columns with nans or infs
+    mfccs_without_nans = mfccs[~np.isnan(mfccs).any(axis=1)]
+    mfccs_without_nans_or_infs = mfccs_without_nans[~np.isinf(mfccs_without_nans).any(axis=1)]
+
+    return mfccs_without_nans_or_infs
+
 
 
 def get_clip_names(test=False):
@@ -106,6 +112,7 @@ def get_label_df(label_csv_path):
 
 label_df = get_label_df(os.path.join(config.LABEL_DIR, "nips4b_birdchallenge_train_labels.csv"))
 
+
 def get_call_info_df(call_info_csv_path):
 
     raw_df = pd.read_csv(call_info_csv_path)
@@ -113,3 +120,10 @@ def get_call_info_df(call_info_csv_path):
     return raw_df
 
 call_df = get_call_info_df(os.path.join(config.LABEL_DIR, "nips4b_birdchallenge_espece_list.csv"))
+
+
+def calls_in_clip(clipname):
+    labels = label_df.ix[clipname]
+    call_in_clip = (labels == 1).values
+    info_for_calls = call_df.ix[call_in_clip]
+    return info_for_calls

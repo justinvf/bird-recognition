@@ -1,4 +1,3 @@
-import pandas as pd
 import sklearn.metrics
 import numpy as np
 
@@ -18,19 +17,7 @@ def write_submission_csv(prediction_df, filename):
         f.write(submission)
 
 
-def parse_submission_csv(filename):
-
-    df = pd.read_csv(filename)
-    df['filename'] = df.ID.map(lambda x: x.split('.')[0] + '.wav')
-    df['call_id'] = df.ID.map(lambda x: int(x.split('.')[1].split('_')[-1]))
-    return df.pivot(index='filename', values='Probability', columns='call_id')
-
-
 def evaluate(prediction_df, truth_df):
 
     return sklearn.metrics.roc_auc_score(truth_df.values.ravel(), prediction_df.values.ravel())
 
-
-def normalized_even_blend(pred_dfs):
-
-    return np.sum([df/df.mean().mean() for df in pred_dfs]) / len(pred_dfs)

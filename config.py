@@ -1,9 +1,6 @@
-import json
+import os.path
 
-settings = json.load(file('SETTINGS.json'))
-
-WAV_DIR = settings['WAV_DIR']
-MFCC_DIR = settings['MFCC_DIR']
-LABEL_DIR = settings['LABEL_DIR']
-SUBMISSION_DIR = settings['SUBMISSION_DIR']
-OUTPUT_DIR = settings['OUTPUT_DIR']
+DATA_DIR = 'data'
+WAV_DIR = os.path.join(DATA_DIR, "NIPS4B_BIRD_CHALLENGE_TRAIN_TEST_WAV")
+MFCC_DIR = os.path.join(DATA_DIR, "NIPS4B_BIRD_CHALLENGE_TRAIN_TEST_MFCC")
+LABEL_DIR = os.path.join(DATA_DIR, "NIPS4B_BIRD_CHALLENGE_TRAIN_LABELS")

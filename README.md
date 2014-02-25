@@ -1,6 +1,7 @@
 ##[Bird Species Classification](http://www.kaggle.com/c/multilabel-bird-species-classification-nips2013)
 - Second place in [Kaggle contest](http://www.kaggle.com/c/multilabel-bird-species-classification-nips2013/leaderboard)
 - Les Bricoleurs: [Dima Kamalov](http://www.kaggle.com/users/135630/), [Matt Wescott](http://www.kaggle.com/users/16360)
+- [View ipython notebook online](http://nbviewer.ipython.org/github/mattwescott/bird-recognition/blob/simple/simplified.ipynb)
 
 ####Hardware / OS
 
@@ -27,9 +28,6 @@
 9. `virtualenv venv`
 10. `source venv/bin/activate`
 11. `pip install -r requirements.txt`
-
-####Generate Kaggle submission
-- `python create_submission.py` (~4 hours runtime)
 
 ####Predict on new test set
 - Not implemented

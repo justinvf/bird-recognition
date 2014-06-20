@@ -14,7 +14,24 @@ class LabelDistributingBinaryForest:
     def __init__(self, **kwargs):
         self.clf = sklearn.ensemble.RandomForestClassifier(**kwargs)
 
-    def fit(self, list_of_features, fold):
+
+    def fit(self, feature_array_list, label_matrix):
+
+        label_array_list = []
+
+        for i, feature_array in enumerate(feature_array_list):
+            label_array = label_matrix[i]
+            # Repeat the labels for each window of features
+            expanded_label_array = np.repeat(np.atleast_2d(label_array), feature_array.shape[0], axis=0)
+            label_array_list.append(expanded_label_array)
+
+        feature_matrix = np.vstack(feature_array_list)
+        label_matrix = np.vstack(label_array_list)
+
+        self.clf.fit(feature_matrix, label_matrix)
+
+
+    def fit_fold(self, list_of_features, fold):
 
         # Use training_mask to limit the inputs nad outputs to training examples
         label_matrix = fold.label_df.ix[fold.clipnames[fold.training_mask]].values

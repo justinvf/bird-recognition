@@ -5,10 +5,6 @@ Email me at mattwescott@gmail.com with questions or comments
 
   `git clone https://github.com/mattwescott/bird-recognition.git`
 
-2. **Switch to tutorial branch**
-
-  `cd bird-recognition; git checkout scipy-tutorial`
-
 3. **Sign up for Kaggle**
 
   [Kaggle](http://www.kaggle.com/account/register)
@@ -29,6 +25,6 @@ Email me at mattwescott@gmail.com with questions or comments
 
 7. Run check_env.py
 
-  `python check_env.py`
+  `python bird-recognition/check_env.py`
 
 8. See you in Austin!

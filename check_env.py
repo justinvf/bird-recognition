@@ -1,20 +1,33 @@
-# make sure packages are available
-import matplotlib
-import numpy
-import scipy
-import sklearn
-import pandas
+import os
+import sys
 
-import submission_utils
-import FoldBuilder
-import wav_utils
-import data
-import transform
-import classifier
-import config
+requirements = [
+    ('numpy', '1.8.1'),
+    ('pandas', '0.14.0'),
+    ('scikit-learn', '0.14'),
+    ('scipy', '0.14.0'),
+    ('matplotlib', '1.3.1'),
+    ('IPython', '2.1.0'),
+]
 
-# check for elements added in sklearn 0.14
-try:
-    from sklearn.ensemble import AdaBoostRegressor
-except ImportError:
-    print("Error: sklearn 0.14 required, you have {0}".format(sklearn.__version__))
+if sys.version_info[:2] != (2, 7):
+    print "\nWarning: Tutorial tested with python2.7"
+
+def try_import(package_name, suggested_version):
+    try:
+        module = __import__(package_name)
+    except ImportError:
+        print "\nError: couldn't import %s" % package_name
+    else:
+        if module.__version__ != suggested_version:
+            print "\nWarning: Tutorial tested with %s=%s" %(package_name, suggested_version)
+            print "You have %s=%s" %(package_name, module.__version__)
+
+
+[try_import(package_name, suggested_version) for package_name, suggested_version in requirements]
+
+print "\nAttempting to start IPython notebook\n\n"
+code = os.system("ipython notebook")
+if code != 0:
+    print("ERROR: You can't seem to start up an IPython notebook")
+

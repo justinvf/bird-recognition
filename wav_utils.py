@@ -1,5 +1,6 @@
 import numpy as np
 import data
+import matplotlib.pyplot as plt
 
 from IPython.core.display import HTML
 # from http://nbviewer.ipython.org/5507501/the%20sound%20of%20hydrogen.ipynb
@@ -49,7 +50,6 @@ def compute_spectrogram(wav_array):
     return np.fft.fftfreq(nwin, 1.0/sr)[:nfft/2], X
 
 
-import matplotlib.pyplot as plt
 def plot_spectrogram(freqs, X, syllable_splits=None, low_cutoff_khz=0.5, high_cutoff_khz=10):
 
     low_cutoff_index = int(float(len(freqs))/freqs[-1]*1000*low_cutoff_khz)

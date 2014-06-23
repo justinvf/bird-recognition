@@ -17,6 +17,8 @@ class LabelDistributingBinaryForest:
 
     def fit(self, feature_array_list, label_matrix):
 
+        assert(len(label_matrix) == len(feature_array_list))
+
         label_array_list = []
 
         for i, feature_array in enumerate(feature_array_list):

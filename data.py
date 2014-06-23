@@ -57,7 +57,7 @@ def get_mfcc_array(clipname):
         filename = "cepst_conc_cepst_nips4b_birds_trainfile%03d.txt" % clipid
         path = os.path.join(train_dir, filename)
 
-    mfccs = np.array( [[float(x) for x in line.strip().split(" ") if x] for line in file(path).readlines()]).transpose()
+    mfccs = np.array( [[float(x) for x in line.strip().split(" ") if x] for line in open(path, 'rt').readlines()]).transpose()
 
     # Drop columns with nans or infs
     mfccs_without_nans = mfccs[~np.isnan(mfccs).any(axis=1)]
